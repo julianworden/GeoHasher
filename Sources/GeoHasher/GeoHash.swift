@@ -9,8 +9,8 @@
 import Foundation
 import CoreLocation
 
-let DEFAULT_PRECISION = 10
-let MAX_PRECISION = 22
+typealias DEFAULT_PRECISION = 10
+typealias MAX_PRECISION = 22
 
 public struct GeoHash {
     
