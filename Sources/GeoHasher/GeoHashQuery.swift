@@ -102,18 +102,18 @@ public struct GeoHashQuery: Equatable, Hashable {
         hash = String(hash[...String.Index(utf16Offset: precision, in: hash)])
         let base = hash[...String.Index(utf16Offset: hash.count - 1, in: hash)]
         let char = CChar(String.Index(utf16Offset: hash.count-1, in: hash).distance(in: hash))
-        let lastValue = Base32Utils.base32CharacterToValue(character: char)
+        let lastValue = Base32Utils.base32CharacterToValue(character: Base32Utils.base32Chars[Int(char)])
         let significantBits = bits - (base.count*5)
         let unusedbits = 5 - significantBits
         // delete unused bits
         let startValue = (lastValue >> unusedbits) << unusedbits
         let endValue = startValue + (1 << unusedbits)
-        let startHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(startValue)))
+        let startHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(startValue)) as! CVarArg)
         var endHash: String
         if endValue > 31 {
             endHash = String(format: "%@~", String(base))
         } else {
-            endHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(endValue)))
+            endHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(endValue)) as! CVarArg)
         }
         return GeoHashQuery(startValue: startHash, endValue: endHash)
     }

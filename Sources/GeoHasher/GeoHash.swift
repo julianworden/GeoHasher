@@ -9,8 +9,8 @@
 import Foundation
 import CoreLocation
 
-fileprivate let DEFAULT_PRECISION = 10
-fileprivate let MAX_PRECISION = 22
+let DEFAULT_PRECISION = 10
+let MAX_PRECISION = 22
 
 public struct GeoHash {
     
@@ -51,17 +51,17 @@ public struct GeoHash {
                     range[1] = mid
                 }
             }
-            buffer[Int(i)] = Base32Utils.valueToBase32Character(value: Int(hashVal))
+            buffer[Int(i)] = CChar(hashVal)
         }
         self.geoHashValue = NSString(bytes: buffer, length: buffer.count, encoding: String.Encoding.ascii.rawValue)! as String
     }
     
     func isValidGeoHash(_ hash: String) -> Bool {
-        let base32Set: CharacterSet = CharacterSet(charactersIn: Base32Utils.base32Characters())
+        let base32Set: Set = Set(Base32Utils.base32Chars)
         if hash.count == 0 {
             return false
         }
-        let hashCharSet = CharacterSet(charactersIn: hash)
+        let hashCharSet = Set(hash)
         if !base32Set.isSuperset(of: hashCharSet) {
             return false
         }
