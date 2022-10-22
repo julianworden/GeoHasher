@@ -11,18 +11,18 @@ import Foundation
 struct Base32Utils {
     
     static var base32Chars: [Character] = {
-        var chars: [Character] = []
+        var chars = [Character]()
         "0123456789bcdefghjkmnpqrstuvwxyz".forEach { char in
             chars.append(char)
         }
         return chars
     }()
     
-    static func valueToBase32Character(value: Int) -> Character {
+    static func valueToBase32Character(value: Int) -> String {
         if value > 31 {
             NSException(name: .invalidArgumentException, reason: "Not a valid base32 value: \(value)").raise()
         }
-        return base32Chars[value]
+        return String(base32Chars[value])
     }
     
     static func base32CharacterToValue(character: Character) -> Int {
