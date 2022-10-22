@@ -111,7 +111,7 @@ public struct GeoHashQuery: Equatable, Hashable {
         let startHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(startValue)) as! CVarArg)
         var endHash: String
         if endValue > 31 {
-            endHash = String(format: "%@~", String(base))
+            endHash = String(format: "%@", String(base))
         } else {
             endHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(endValue)) as! CVarArg)
         }
