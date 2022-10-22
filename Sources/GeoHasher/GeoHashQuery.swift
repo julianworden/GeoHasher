@@ -108,12 +108,12 @@ public struct GeoHashQuery: Equatable, Hashable {
         // delete unused bits
         let startValue = (lastValue >> unusedbits) << unusedbits
         let endValue = startValue + (1 << unusedbits)
-        let startHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(startValue)) as! CVarArg)
+        let startHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(startValue)))
         var endHash: String
         if endValue > 31 {
             endHash = String(format: "%@~", String(base))
         } else {
-            endHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(endValue)) as! CVarArg)
+            endHash = String(format: "%@%c", String(base), Base32Utils.valueToBase32Character(value: Int(endValue)))
         }
         return GeoHashQuery(startValue: startHash, endValue: endHash)
     }
